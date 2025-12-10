@@ -46,4 +46,4 @@ Essas variáveis são pontos de análise para prever a probabilidade de churn.
 
 ## 📂 Estrutura do projeto
 
-- pode ser alterado por qualquer membro da equipe caso seja tenha de desenvolver novos pontos que venha surgir em reunião.
+- pode ser alterado por qualquer membro da equipe caso tenha de desenvolver novos pontos que venha surgir em reunião.
