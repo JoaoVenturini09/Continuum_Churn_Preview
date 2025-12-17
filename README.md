@@ -5,7 +5,7 @@ Projeto para prever e tentar reverter o churn dos clientes
 
 - As informações envolvidas são de clientes de uma empresa de Academia.
   
-- Com base de dados fictico que sera mais adequado para nossa análise de dados.
+- Com base de dados fictício que sera mais adequado para nossa análise de dados.
 
 # 📊 Continuum
 
