@@ -22,11 +22,16 @@ O foco inicial é construir uma API robusta que permita interação entre **Java
 ---
 
 ## 🔑 Variáveis consideradas alterar depois do acordo durante as semanas Contrato de integração
-- `account_Charges_Monthly` → Valor mensal da conta.
-- `internet_InternetService_Fiber optic` → Tipo de serviço de internet.
-- `account_PaperlessBilling` → Faturamento sem papel.
-- `account_PaymentMethod_Electronic check` → Método de pagamento.
-- `internet_StreamingMovies_1` → Uso de streaming de filmes.
+- nps_score
+- tempo_contrato_meses
+- tentou_cancelar_antes
+- valor_mensal
+- atrasos_pagamento_12m
+- duracao_media_treino_min
+- engajamento_por_custo
+- educao_frequencia_3m
+- frequencia_mensal
+- tem_personal_trainer
 
 Essas variáveis são pontos de análise para prever a probabilidade de churn.
 
