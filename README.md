@@ -46,14 +46,6 @@ Durante a evolução do projeto, os seguintes pontos serão trabalhados:
 
 ---
 
-## 🏗️ Arquitetura
-- **Java API** → Responsável pela exposição dos endpoints REST.
-- **Python Engine** → Processamento de dados, análise estatística e machine learning.
-- **Integração** → Comunicação via JSON/CSV entre os serviços.
-- **Microserviço** → Modular, escalável e preparado para futuras expansões.
-
----
-
 ## ⚙️ Tecnologias e Ferramentas
 
 • 	Python (microserviço e APIs)
