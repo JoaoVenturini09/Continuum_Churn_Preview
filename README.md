@@ -12,23 +12,36 @@ Projeto para prever e tentar reverter o churn dos clientes
 Projeto **Continuum** tem como objetivo realizar **análise de churn em Academia**, utilizando variáveis críticas de comportamento e perfil de clientes.  
 O foco inicial é construir uma API robusta que permita interação entre **Java** e **Python**, suportando formatos **JSON** e **CSV**, com apoio da ciência de dados.
 
+Constante evolução, focado em entregar soluções inovadoras e sustentáveis. Este repositório documenta o progresso, objetivos e melhorias planejadas para garantir qualidade, escalabilidade e impacto positivo.
+
+
 ---
 
 ## 🚀 Objetivo
-- Detectar padrões de **churn (cancelamento de clientes)**.
-- Integrar análises estatísticas e modelos de machine learning em um **microserviço Python**.
-- Fornecer endpoints para consumo em aplicações externas.
+
+Durante a evolução do projeto, os seguintes pontos serão trabalhados:
+
+• 	Refatoração de Código Melhorar a legibilidade, modularidade e eficiência da base de código.
+• 	Testes Automatizados Implementar testes unitários e de integração para aumentar a confiabilidade.
+• 	Performance e Escalabilidade Otimizar processos e arquitetura para suportar maior volume de dados e usuários.
+• 	Interface e Experiência do Usuário (UX/UI) Aprimorar design e usabilidade para tornar o sistema mais intuitivo.
+• 	Segurança Adotar boas práticas de segurança e proteção de dados.
+• 	Integrações Futuras Planejar e implementar integrações com serviços externos relevantes.
+
 
 ---
 
 ## 🔑 Variáveis consideradas alterar depois do acordo durante as semanas Contrato de integração
-- `account_Charges_Monthly` → Valor mensal da conta.
-- `internet_InternetService_Fiber optic` → Tipo de serviço de internet.
-- `account_PaperlessBilling` → Faturamento sem papel.
-- `account_PaymentMethod_Electronic check` → Método de pagamento.
-- `internet_StreamingMovies_1` → Uso de streaming de filmes.
-
-Essas variáveis são pontos de análise para prever a probabilidade de churn.
+- nps_score	
+- tempo_contrato_meses
+- tentou_cancelar_antes
+- valor_mensal	
+- atrasos_pagamento_12m
+- duracao_media_treino_min	
+- engajamento_por_custo	
+- reducao_frequencia_3m	
+- frequencia_mensal
+- tem_personal_trainer
 
 ---
 
@@ -40,12 +53,30 @@ Essas variáveis são pontos de análise para prever a probabilidade de churn.
 
 ---
 
-## ⚙️ Tecnologias
-- **Java (Spring Boot)** → Criação da API.
-- **Python (Pandas, Scikit-learn)** → Análise de dados e modelos de churn.
+## ⚙️ Tecnologias e Ferramentas
 
+• 	Python (microserviço e APIs)
+• 	Machine Learning (bibliotecas como scikit-learn, pandas, numpy)
+• 	Banco de Dados H2 (persistência leve e integrada)
+• 	Docker (containerização e deploy)
+• 	Frameworks de API (FastAPI ou Flask)
+• 	Dashboard (Streamlit ou Dash para visualização)
 ---
 
 ## 📂 Estrutura do projeto
 
 - pode ser alterado por qualquer membro da equipe caso tenha de desenvolver novos pontos que venha surgir em reunião.
+
+
+
+## 📈 Entregáveis Esperados
+
+1. 	Microserviço Python com endpoints REST.
+2. 	Modelos de machine learning integrados para previsão de churn.
+3. 	API com tratamento de erros e logs centralizados.
+4. 	Endpoint de estatísticas de dados.
+5. 	Banco H2 configurado para persistência.
+6. 	Dashboard simples para visualização de riscos e métricas.
+7. 	Processamento batch para análises periódicas.
+8. 	Container configurado para deploy.
+9. 	Parametrização de métricas de retenção.
