@@ -1,12 +1,3 @@
-# Continuum_Churn_Preview
-Projeto para prever e tentar reverter o churn dos clientes
-
-- Atentar-se ao fato de que este é o repositório oficial que será demonstrado aos responsáveis. 
-
-- As informações envolvidas são de clientes de uma empresa de Academia.
-  
-- Com base de dados fictício que sera mais adequado para nossa análise de dados.
-
 # 📊 Continuum
 
 Projeto **Continuum** tem como objetivo realizar **análise de churn em Academia**, utilizando variáveis críticas de comportamento e perfil de clientes.  
@@ -14,6 +5,11 @@ O foco inicial é construir uma API robusta que permita interação entre **Java
 
 Constante evolução, focado em entregar soluções inovadoras e sustentáveis. Este repositório documenta o progresso, objetivos e melhorias planejadas para garantir qualidade, escalabilidade e impacto positivo.
 
+- Atentar-se ao fato de que este é o repositório oficial que será demonstrado aos responsáveis. 
+
+- As informações envolvidas são de clientes de uma empresa de Academia.
+  
+- Com base de dados fictício que sera mais adequado para nossa análise de dados.
 
 ---
 
@@ -61,7 +57,6 @@ Durante a evolução do projeto, os seguintes pontos serão trabalhados:
 • 	Docker (containerização e deploy)
 • 	Frameworks de API (FastAPI ou Flask)
 • 	Dashboard (Streamlit ou Dash para visualização)
----
 
 ## 📂 Estrutura do projeto
 
