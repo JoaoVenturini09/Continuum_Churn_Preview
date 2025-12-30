@@ -18,10 +18,15 @@ Constante evolução, focado em entregar soluções inovadoras e sustentáveis. 
 Durante a evolução do projeto, os seguintes pontos serão trabalhados:
 
 • 	Refatoração de Código Melhorar a legibilidade, modularidade e eficiência da base de código.
+
 • 	Testes Automatizados Implementar testes unitários e de integração para aumentar a confiabilidade.
+
 • 	Performance e Escalabilidade Otimizar processos e arquitetura para suportar maior volume de dados e usuários.
+
 • 	Interface e Experiência do Usuário (UX/UI) Aprimorar design e usabilidade para tornar o sistema mais intuitivo.
+
 • 	Segurança Adotar boas práticas de segurança e proteção de dados.
+
 • 	Integrações Futuras Planejar e implementar integrações com serviços externos relevantes.
 
 
@@ -52,10 +57,15 @@ Durante a evolução do projeto, os seguintes pontos serão trabalhados:
 ## ⚙️ Tecnologias e Ferramentas
 
 • 	Python (microserviço e APIs)
+
 • 	Machine Learning (bibliotecas como scikit-learn, pandas, numpy)
+
 • 	Banco de Dados H2 (persistência leve e integrada)
+
 • 	Docker (containerização e deploy)
+
 • 	Frameworks de API (FastAPI ou Flask)
+
 • 	Dashboard (Streamlit ou Dash para visualização)
 
 ## 📂 Estrutura do projeto
