@@ -2,21 +2,26 @@ package com.hackathon.continuum.service;
 
 import com.hackathon.continuum.dto.EntradaDTO;
 import com.hackathon.continuum.dto.RespostaDTO;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 @Service
 public class PredictService {
 
-    //TODO: implementar serviço de comunicação para API de dados
-    //Observação: Atualmente é um mock.
+    @Value("${URI_API_CONTINUUM_CHURN_PYTHON}")
+    private String uri;
+
+    private RestClient restClient = RestClient.create();
+
     public RespostaDTO predict(EntradaDTO entradaDTO){
-        return mockPredict();
+
+        return restClient.post()
+                .uri(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(entradaDTO)
+                .retrieve()
+                .body(RespostaDTO.class);
     }
-
-
-    //TODO: remover após conclusão do serviço.
-    public RespostaDTO mockPredict(){
-        return new RespostaDTO("Vai cancelar", 0.76);
-    }
-
 }
