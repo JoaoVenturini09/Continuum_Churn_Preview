@@ -8,7 +8,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @Slf4j
 @RestControllerAdvice
@@ -18,20 +17,29 @@ public class TratadorDeExcecoes {
     public ResponseEntity tratarErro400(MethodArgumentNotValidException ex){
 
         var erros = ex.getFieldErrors();
+        int numeroDeErros = erros.size();
+        String traceId = getTraceId();
 
-        log.warn("Erro de validação [{}]: {} campos inválidos", getTraceId(), erros.size());
+        var msgCampos = erros.size() > 1 ? String.format("Os seguintes %d campos não passaram na validação: ", numeroDeErros) : "O seguinte campo não passou na validação: ";
+
+        var camposInvalidos = erros.stream().map(DadosErroValidacao::new).toList();
+
+        log.warn("Erro de validação - TraceID: [{}] - {} {}",
+                traceId,
+                msgCampos,
+                camposInvalidos);
 
         return ResponseEntity.badRequest().body(new ErroPadraoDTO(
                 "Erro de validação nos campos informados.",
-                getTraceId(),
-                erros.stream().map(DadosErroValidacao::new).toList()
+                traceId,
+                camposInvalidos
         ));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity tratarErro400(HttpMessageNotReadableException ex) {
 
-        log.warn("Falha na leitura do JSON [{}]: {}", getTraceId(), ex.getMostSpecificCause().getMessage());
+        log.warn("Falha na leitura do JSON - TraceId: [{}] - {}", getTraceId(), ex.getMostSpecificCause().getMessage());
 
         return ResponseEntity.badRequest().body(new ErroPadraoDTO(
                 "Erro na sintaxe do JSON ou tipo de dado inválido. Verifique se campos numéricos receberam texto.",
@@ -43,7 +51,7 @@ public class TratadorDeExcecoes {
     @ExceptionHandler(Exception.class)
     public ResponseEntity tratarErro500(Exception ex) {
 
-        log.error("Erro crítico [{}]: {}", getTraceId(), ex.getMessage(), ex);
+        log.error("Erro crítico - TraceId: [{}] - {}", getTraceId(), ex.getMessage(), ex);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErroPadraoDTO(
                 "Ocorreu um erro interno. Informe o código de rastreio ao suporte.",
@@ -62,6 +70,11 @@ public class TratadorDeExcecoes {
 
         public DadosErroValidacao(FieldError erro){
             this(erro.getField(), erro.getDefaultMessage());
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Campo: %s, Mensagem: %s",campo(), mensagem());
         }
 
     }
