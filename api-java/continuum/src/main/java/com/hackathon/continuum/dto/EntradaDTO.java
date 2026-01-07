@@ -2,13 +2,9 @@ package com.hackathon.continuum.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.validation.constraints.*;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Max;
+import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record EntradaDTO(
@@ -69,7 +65,46 @@ public record EntradaDTO(
     // Indica se o cliente possui personal trainer
     @NotBlank(message = "A informação sobre personal trainer é obrigatória")
     @JsonAlias("num__tem_personal_trainer")
-    String tem_personal_trainer
+    String tem_personal_trainer,
 
+    // --- Novos atributos opcionais --- 
+    @Positive(message = "O número de reclamações deve ser positivo") 
+    @JsonAlias("num__numero_reclamacoes") 
+    Integer numero_reclamacoes, 
+    
+    @JsonAlias("num__participa_aulas_coletivas") 
+    String participa_aulas_coletivas, // "Sim" ou "Não" 
+    
+    @JsonAlias("num__participou_eventos") 
+    String participou_eventos, // "Sim" ou "Não" 
+    
+    @JsonAlias("num__uso_app_academia") 
+    String uso_app_academia, // "Sim" ou "Não" 
+    
+    @JsonAlias("cat__forma_pagamento") 
+    String forma_pagamento, // "Cartão de Crédito", "Débito Automático", "Pix", "Boleto" 
+    
+    @JsonAlias("teve_desconto_promocao") 
+    String teve_desconto_promocao, // "Sim" ou "Não" 
+    
+    @JsonAlias("tipo_plano") 
+    String tipo_plano, // "Básico", "Intermediário", "VIP", "Premium" 
+    
+    @JsonAlias("genero") 
+    String genero, // "M" ou "F" 
+    
+    @Positive(message = "A idade deve ser positiva") 
+    @JsonAlias("idade") 
+    Integer idade, 
+    
+    @JsonAlias("data_inicio_contrato") 
+    LocalDate data_inicio_contrato, 
+    
+    @Positive(message = "Os dias desde o último acesso devem ser positivos") 
+    @JsonAlias("dias_desde_ultimo_acesso") 
+    Integer dias_desde_ultimo_acesso, 
+    
+    @JsonAlias("churn") 
+    String churn // "Sim" ou "Não" )     
 ) {
 }
