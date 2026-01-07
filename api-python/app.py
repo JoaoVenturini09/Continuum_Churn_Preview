@@ -28,7 +28,6 @@ def predict():
     dados_dict = [request.get_json()]
 
     try:
-        print("vnova")
         resultados = previsao_lote.fazer_previsao_lote(dados_dict, model)
         print(resultados)
         resultado = resultados[0]

@@ -1,6 +1,7 @@
 package com.hackathon.continuum.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.*;
 
@@ -97,7 +98,8 @@ public record EntradaDTO(
     @JsonAlias("idade") 
     Integer idade, 
     
-    @JsonAlias("data_inicio_contrato") 
+    @JsonAlias("data_inicio_contrato")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     LocalDate data_inicio_contrato, 
     
     @Positive(message = "Os dias desde o último acesso devem ser positivos") 
