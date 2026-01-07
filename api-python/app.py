@@ -1,7 +1,10 @@
-from flask import Flask, jsonify, request
-import joblib
-import pandas as pd
 import json
+
+import joblib
+from flask import Flask, jsonify, request
+
+import previsao_lote
+
 
 def load_config():
     with open('config.json', 'r', encoding='utf-8') as f:
@@ -22,19 +25,21 @@ model = joblib.load(caminho_modelo)
 @app.route('/predict', methods=['POST'])
 def predict():
 
-    dados_dict = VALORES_PADRAO | request.get_json()
-
-    df_input = pd.DataFrame([dados_dict])
+    dados_dict = [request.get_json()]
 
     try:
-        se_vai_cancelar = model.predict(df_input)[0]
-
-        probabilidades = model.predict_proba(df_input)[0]
-        probabilidade_churn = probabilidades[1]
+        print("vnova")
+        resultados = previsao_lote.fazer_previsao_lote(dados_dict, model)
+        print(resultados)
+        resultado = resultados[0]
 
         return jsonify({
-            "previsao": int(se_vai_cancelar),
-            "probabilidade": float(probabilidade_churn),
+            "cliente_id": resultado["cliente_id"],
+            "probabilidade": resultado["probabilidade_churn"],
+            "risco": resultado["risco"],
+            "1_mais_relevante": resultado["1_mais_relevante"],
+            "2_mais_relevante": resultado["2_mais_relevante"],
+            "3_mais_relevante": resultado["3_mais_relevante"]
         })
 
     except Exception as e:
