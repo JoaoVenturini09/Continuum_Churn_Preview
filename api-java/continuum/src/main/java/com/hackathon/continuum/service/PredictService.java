@@ -13,7 +13,7 @@ public class PredictService {
     @Value("${URI_API_CONTINUUM_CHURN_PYTHON}")
     private String uri;
 
-    private RestClient restClient = RestClient.create();
+    private final RestClient restClient = RestClient.create();
 
     public RespostaDTO predict(EntradaDTO entradaDTO){
 
