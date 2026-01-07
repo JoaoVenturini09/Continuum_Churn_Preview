@@ -25,7 +25,7 @@ model = joblib.load(caminho_modelo)
 @app.route('/predict', methods=['POST'])
 def predict():
 
-    dados_dict = [request.get_json()]
+    dados_dict = [request.get_json() | VALORES_PADRAO]
 
     try:
         resultados = previsao_lote.fazer_previsao_lote(dados_dict, model)

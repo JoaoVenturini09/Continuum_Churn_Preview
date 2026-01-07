@@ -6,5 +6,4 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public record RespostaDTO(
     String previsao,
     double probabilidade) {
-
 }
