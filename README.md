@@ -4,6 +4,7 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" alt="Oracle Logo" width="160"/>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://www.alura.com.br/assets/img/alura-logo.svg" alt="Alura Logo" width="160"/>
+  [Logo NoCountry](https://nocountry.tech/assets/logo.png)
 </div>
 
 
