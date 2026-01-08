@@ -1,7 +1,7 @@
 # 📊 Continuum
 
-O **Projeto Continuum** tem como objetivo realizar **análise de churn em Academia**, utilizando variáveis críticas de comportamento e perfil de clientes.  
-O foco inicial é construir uma **API robusta** que permita interação entre **Java e Python**, suportando formatos **JSON** e **CSV**, com apoio da ciência de dados.
+O Projeto Continuum tem como objetivo realizar análise de churn em Academia, utilizando variáveis críticas de comportamento e perfil de clientes.
+O foco inicial é construir uma API robusta que permita interação entre Java e Python, suportando formatos JSON e CSV, com apoio da ciência de dados.
 
 
 ---
