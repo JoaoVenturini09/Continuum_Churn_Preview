@@ -1,5 +1,9 @@
-<img src="assets/oracle.png" alt="Oracle" width="150"/>
-<img src="assets/alura.png" alt="Alura" width="150"/>
+<div align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" alt="Oracle Logo" width="160"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://www.alura.com.br/assets/img/alura-logo.svg" alt="Alura Logo" width="160"/>
+</div>
+
 
 # 📊 Continuum
 
