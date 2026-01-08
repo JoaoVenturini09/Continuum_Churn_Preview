@@ -5,6 +5,8 @@ O Projeto Continuum propõe uma solução completa para previsão de churn, unin
 
 🎯 Desafio
 
+O ChurnInsight busca responder à seguinte pergunta:
+
 ➡️ Quais clientes apresentam maior probabilidade de evasão ?
 
 Essa integração permitirá que o negócio aja antes que o cliente decida sair, aumentando a retenção e reduzindo perdas.
