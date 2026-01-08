@@ -4,11 +4,15 @@ O Projeto Continuum tem como objetivo realizar análise de churn em Academia, ut
 O foco inicial é construir uma API robusta que permita interação entre Java e Python, suportando formatos JSON e CSV.
 
 🎯 Desafio
+
 O ChurnInsight busca responder à seguinte pergunta:
+
 ➡️ Quais clientes apresentam maior probabilidade de evasão e como podemos agir preventivamente?
 Para isso:
+
 • 	O time de Data Science será responsável por desenvolver um modelo preditivo de churn.
 • 	O time de Back-end construirá uma API que disponibilizará essas previsões para outros sistemas.
+
 Essa integração permitirá que o negócio aja antes que o cliente decida sair, aumentando a retenção e reduzindo perdas.
 
 ---
