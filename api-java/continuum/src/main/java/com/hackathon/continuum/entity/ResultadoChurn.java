@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+@Entity
+@Table(name = "resultado_churn")
 public class ResultadoChurn {
 
     @Id
@@ -34,7 +36,73 @@ public class ResultadoChurn {
 	@Column(name = "terceiro_mais_relevante", length = 100)
 	private String terceiroMaisRelevante;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private LocalDateTime resultadoDataHora;
 
+	// Construtor padrão
+	public ResultadoChurn() {
+	}
+
+	// Construtor 
+	public ResultadoChurn(RespostaDTO dto, AnalizeChurn analizeChurn) {
+    this.analizeChurn = analizeChurn;
+    this.probabilidadeChurn = dto.probabilidade_churn();
+    this.risco = dto.risco();
+    this.primeiroMaisRelevante = dto.primeiro_mais_relevante();
+    this.segundoMaisRelevante = dto.segundo_mais_relevante();
+    this.terceiroMaisRelevante = dto.terceiro_mais_relevante();
+	}
+
+	// Data e hora automáticas
+	@PrePersist
+	private void prePersist() {
+    	this.resultadoDataHora = LocalDateTime.now();
+	}
+
+	// Getters
+	public Long getId() {
+        return id;
+    }
+
+    public AnalizeChurn getAnalizeChurn() {
+        return analizeChurn;
+    }
+
+    public Double getProbabilidadeChurn() {
+        return probabilidadeChurn;
+    }
+
+    public String getRisco() {
+        return risco;
+    }
+
+    public String getPrimeiroMaisRelevante() {
+        return primeiroMaisRelevante;
+    }
+
+    public String getSegundoMaisRelevante() {
+        return segundoMaisRelevante;
+    }
+
+    public String getTerceiroMaisRelevante() {
+        return terceiroMaisRelevante;
+    }
+
+    public LocalDateTime getResultadoDataHora() {
+        return resultadoDataHora;
+    }
+
+	// toString
+	@Override
+    public String toString() {
+        return "ResultadoChurn{" +
+                "id=" + id +
+                ", analizeChurnId=" + analizeChurn.getCliente_id() +
+                ", probabilidadeChurn=" + probabilidadeChurn +
+                ", risco='" + risco + '\'' +
+                ", primeiroMaisRelevante='" + primeiroMaisRelevante + '\'' +
+                ", segundoMaisRelevante='" + segundoMaisRelevante + '\'' +
+                ", terceiroMaisRelevante='" + terceiroMaisRelevante + '\'' +
+                ", resultadoDataHora=" + resultadoDataHora +
+                '}';
 }
