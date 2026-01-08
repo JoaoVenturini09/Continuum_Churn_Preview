@@ -1,7 +1,8 @@
 # 📊 Continuum
 
-O Projeto Continuum tem como objetivo realizar análise de churn em Academia, utilizando variáveis críticas de comportamento e perfil de clientes.
-O foco inicial é construir uma API robusta que permita interação entre Java e Python, suportando formatos JSON e CSV.
+O Projeto Continuum propõe uma solução completa para previsão de churn, unindo Data Science e Back-end: o time de DS treina o modelo preditivo e o time de BE expõe previsões via API para que o negócio aja antes que o cliente decida sair. Com base em hábitos de uso e histórico de pagamento, uma fintech ou academia pode identificar clientes com alta probabilidade de evasão e realizar ações de retenção.
+
+
 
 🎯 Desafio
 
@@ -15,6 +16,12 @@ Para isso:
 • 	O time de Back-end construirá uma API que disponibilizará essas previsões para outros sistemas.
 
 Essa integração permitirá que o negócio aja antes que o cliente decida sair, aumentando a retenção e reduzindo perdas.
+
+🔎 Visão geral da arquitetura
+• 	Fluxo: Dados de clientes → API Java (DTO valida e persiste em H2) → Chamada à API Python (modelo) → Resposta com probabilidade/risco → Persistência do resultado e interpretabilidade.
+• 	Integração: API Java (Spring) orquestra entrada e persistência; API Python (FastAPI) entrega previsões com interpretabilidade das features mais relevantes.
+• 	Persistência: Banco H2 em modo dev para agilidade e leveza; pode evoluir para RDBMS gerenciado em produção.
+• 	Formatos: Integração e interoperabilidade em JSON e CSV.
 
 ---
 
@@ -72,7 +79,10 @@ Essa integração permitirá que o negócio aja antes que o cliente decida sair,
 
 ## ▶️ Como executar o modelo e a API
 
-### 1. Treinar e salvar o modelo
+### 1. Treinar e salvar o modelo :
+
+Este arquivo foi Churn_Academia_V15.ipynb utilizado para criação do modelo pipeline.
+
 ```python
 import joblib
 from sklearn.pipeline import Pipeline
@@ -84,8 +94,9 @@ joblib.dump(modelo_rf_otimizado, "modelo_pipeline_completo.pkl")
 
 ```
 
-### 2. Executar a API (FastAPI)
-Crie um arquivo `main.py`:
+🔗 API e integração com o modelo (Python):
+
+API Python (FastAPI) — previsão em lote
 
 ```python
 from fastapi import FastAPI
@@ -140,6 +151,7 @@ if __name__ == '__main__':
 
 
 Rodar a API:
+
 O arquivo conteúdo do previsao_lote.py tem a função montor para processar lista de clientes e retornar previsões com interpretabilidade:
 
 import pandas as pd
@@ -184,7 +196,6 @@ def fazer_previsao_lote(lista_clientes, modelo_pipeline):
 
 ```
 
-```
 
 ---
 
@@ -260,12 +271,107 @@ Resposta esperada
     }
   ]
 ```
+▶️ Como executar
+Backend Java (H2)
+• 	Pré-requisitos:
+• 	JDK: Temurin/OpenJDK 17
+• 	Build: Maven 3.9+
+• 	Banco: H2 embutido (dev)
+• 	Configuração H2 (application.properties)
+
+spring.datasource.url=jdbc:h2:mem:continuumdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.hibernate.ddl-auto=update
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+DTO de entrada
+
+Use o DTO para validar e mapear os campos recebidos pela API Java. Ele suporta aliases compatíveis com o pipeline do modelo.
+
+package com.hackathon.continuum.dto;
+
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.validation.constraints.*;
+
+import java.time.LocalDate;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record EntradaDTO(
+    @NotNull @Min(0) @Max(10) @JsonAlias("num__nps_score") Integer nps_score,
+    @NotNull @PositiveOrZero @JsonAlias("num__tempo_contrato_meses") Double tempo_contrato_meses,
+    @NotBlank @JsonAlias("num__tentou_cancelar_antes") String tentou_cancelar_antes,
+    @NotNull @Positive @JsonAlias("num__valor_mensal") Double valor_mensal,
+    @NotNull @PositiveOrZero @JsonAlias("num__atrasos_pagamento_12m") Integer atrasos_pagamento_12m,
+    @NotNull @Positive @JsonAlias("num__duracao_media_treino_min") Integer duracao_media_treino_min,
+    @NotNull @PositiveOrZero @JsonAlias("num__engajamento_por_custo") Double engajamento_por_custo,
+    @NotBlank @JsonAlias("num__reducao_frequencia_3m") String reducao_frequencia_3m,
+    @NotNull @PositiveOrZero @JsonAlias("num__frequencia_mensal") Integer frequencia_mensal,
+    @NotBlank @JsonAlias("num__tem_personal_trainer") String tem_personal_trainer,
+    @Positive @JsonAlias("num__numero_reclamacoes") Integer numero_reclamacoes,
+    @JsonAlias("num__participa_aulas_coletivas") String participa_aulas_coletivas,
+    @JsonAlias("num__participou_eventos") String participou_eventos,
+    @JsonAlias("num__uso_app_academia") String uso_app_academia,
+    @JsonAlias("cat__forma_pagamento") String forma_pagamento,
+    @JsonAlias("teve_desconto_promocao") String teve_desconto_promocao,
+    @JsonAlias("tipo_plano") String tipo_plano,
+    @JsonAlias("genero") String genero,
+    @Positive @JsonAlias("idade") Integer idade,
+    @JsonAlias("data_inicio_contrato") LocalDate data_inicio_contrato,
+    @Positive @JsonAlias("dias_desde_ultimo_acesso") Integer dias_desde_ultimo_acesso,
+    @JsonAlias("churn") String churn
+) {}
+
+Entidade AnalizeChurn (H2)
+
+package com.hackathon.continuum.entity;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "analize_churn")
+public class AnalizeChurn {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cliente_id;
+
+    @Column private String nome;
+
+    @Column private Integer nps_score;
+    @Column private Double tempo_contrato_meses;
+    @Column private String tentou_cancelar_antes;
+    @Column private Double valor_mensal;
+    @Column private Integer atrasos_pagamento_12m;
+    @Column private Integer duracao_media_treino_min;
+    @Column private Double engajamento_por_custo;
+    @Column private String reducao_frequencia_3m;
+    @Column private Integer frequencia_mensal;
+    @Column private String tem_personal_trainer;
+    @Column private Integer numero_reclamacoes;
+    @Column private String participa_aulas_coletivas;
+    @Column private String participou_eventos;
+    @Column private String uso_app_academia;
+    @Column private String forma_pagamento;
+    @Column private String teve_desconto_promocao;
+    @Column private String tipo_plano;
+    @Column private LocalDate data_inicio_contrato;
+    @Column private Integer dias_desde_ultimo_acesso;
+    @Column private Double churn;
+
+    @Column private LocalDateTime criacao_data_hora;
+}
 
 
 
 ---
 
-## 🐳 Instalação Rápida com Docker
+## 🐳 Instalação Rápida com Docker (opcional para demo)
 
 ### Dockerfile
 ```dockerfile
@@ -306,5 +412,56 @@ docker run -d -p 8000:8000 continuum-api
 - Este repositório documenta o progresso, objetivos e melhorias planejadas para garantir **qualidade, escalabilidade e impacto positivo**.  
 > ⚠️ Este é o repositório oficial que será demonstrado aos responsáveis.  
 > As informações envolvidas são de clientes de uma empresa de Academia, utilizando **base de dados fictícia** para análise.
+>  Lead-in de dados: Os aliases no DTO (JsonAlias) estão alinhados ao pipeline do modelo, facilitando integração direta.
+> H2 em dev: Ideal para demonstração e testes rápidos. Em produção, migre para banco gerenciado.]Interpretabilidade: As três features mais relevantes por cliente ajudam ações de retenção (marketing e suporte) de forma objetiva.
+> Evolução: O projeto é modular e preparado para escalar, incluindo troca de modelo, novas variáveis e integração com serviços externos.
+
+---
+
+---
+
+# 🙌 Créditos Finais — Projeto Continuum Churn Preview
+
+Este repositório documenta o trabalho desenvolvido pela equipe **Continuum Churn Preview**, dentro da iniciativa **ChurnInsight — Prévia de Cancelamentos de Clientes**.  
+O projeto uniu esforços de **Ciência de Dados** e **Back-End** para construir uma solução integrada de previsão de churn, permitindo que empresas ajam de forma preventiva na retenção de clientes.
+
+---
+
+## 📌 Informações da Equipe
+
+- **Nome da equipe na plataforma:** `H12-25-B-Equipamento 31-Ciência de Dados`  
+- **Nome da equipe:** `Continuum Churn Preview`  
+- **Projeto:** `ChurnInsight — Prévia de Cancelamentos de Clientes`  
+
+---
+
+## 👨‍💻 Liderança
+
+- **Líder Geral / Data Science:** João Venturini  
+- **Líder Back-End:** Gabryel Júlio dos Santos  
+
+---
+
+## 👩‍🔬 Equipe de Data Science
+
+- João Venturini — [LinkedIn](https://www.linkedin.com/in/joaoventurini/)  
+- Andreza Lucas — [LinkedIn](https://www.linkedin.com/in/andreza-lucas-da-silva-datascience/)  
+- João Victor Lima Caris de Oliveira — [LinkedIn](https://www.linkedin.com/in/joãovictorcybersecurity/)  
+- Pedro Afonso Pinto Moraes Santos — [LinkedIn](https://www.linkedin.com/in/pedro-afonso-pinto-moraes-santos-5330621b3/)  
+
+---
+
+## 🖥️ Equipe de Back-End
+
+- Nayara Calixto — [LinkedIn](https://www.linkedin.com/in/nayara-calixto-dev/)  
+- Geovane Dias — [LinkedIn](https://www.linkedin.com/in/geovane-dias/)  
+- Gabryel Júlio dos Santos — [LinkedIn](https://www.linkedin.com/in/gabryel-santos)  
+
+---
+
+## 🎯 Reconhecimento
+
+Este projeto é fruto de **colaboração multidisciplinar**, unindo ciência de dados e engenharia de software para entregar uma solução inovadora e sustentável.  
+Agradecemos a todos os membros pela dedicação, criatividade e comprometimento em cada etapa do desenvolvimento.
 
 ---
