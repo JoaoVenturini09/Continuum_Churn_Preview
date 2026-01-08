@@ -1,7 +1,15 @@
 # 📊 Continuum
 
 O Projeto Continuum tem como objetivo realizar análise de churn em Academia, utilizando variáveis críticas de comportamento e perfil de clientes.
-O foco inicial é construir uma API robusta que permita interação entre Java e Python, suportando formatos JSON e CSV, com apoio da ciência de dados e Back-end.
+O foco inicial é construir uma API robusta que permita interação entre Java e Python, suportando formatos JSON e CSV.
+
+🎯 Desafio
+O ChurnInsight busca responder à seguinte pergunta:
+➡️ Quais clientes apresentam maior probabilidade de evasão e como podemos agir preventivamente?
+Para isso:
+• 	O time de Data Science será responsável por desenvolver um modelo preditivo de churn.
+• 	O time de Back-end construirá uma API que disponibilizará essas previsões para outros sistemas.
+Essa integração permitirá que o negócio aja antes que o cliente decida sair, aumentando a retenção e reduzindo perdas.
 
 ---
 
@@ -124,10 +132,53 @@ def predict():
 
 if __name__ == '__main__':
     app.run(port=PORTA)
-```
+
 
 Rodar a API:
-previsao_lote.py ajuda da API em Python em cima.
+O arquivo conteúdo do previsao_lote.py tem a função montor para processar lista de clientes e retornar previsões com interpretabilidade:
+
+import pandas as pd
+import logging
+
+def fazer_previsao_lote(lista_clientes, modelo_pipeline):
+    """
+    Recebe uma lista de dicionários (clientes) e o pipeline do modelo.
+    Retorna uma lista de dicionários com as previsões e as 3 features mais relevantes.
+    """
+    try:
+        df_novos = pd.DataFrame(lista_clientes)
+        prob_churn = modelo_pipeline.predict_proba(df_novos)[:, 1]
+        contributions = modelo_pipeline.predict_proba(df_novos)  # exemplo simplificado
+
+        feature_names_out = df_novos.columns
+        resultados = []
+
+        for i in range(len(df_novos)):
+            contrib_cliente = contributions[i]
+            feat_contrib = pd.Series(contrib_cliente, index=feature_names_out)
+
+            top_3 = feat_contrib.abs().sort_values(ascending=False).head(3).index.tolist()
+            top_3_clean = [f.split('__')[-1] for f in top_3]
+
+            resultados.append({
+                'cliente_id': df_novos.iloc[i].get('cliente_id', f'cliente_{i}'),
+                'probabilidade_churn': round(prob_churn[i], 4),
+                'risco': 'ALTO' if prob_churn[i] >= 0.5 else 'BAIXO',
+                '1_mais_relevante': top_3_clean[0] if len(top_3_clean) > 0 else None,
+                '2_mais_relevante': top_3_clean[1] if len(top_3_clean) > 1 else None,
+                '3_mais_relevante': top_3_clean[2] if len(top_3_clean) > 2 else None
+            })
+
+        logging.info("Resultados da previsão em lote gerados com sucesso.")
+        return resultados
+
+    except Exception as e:
+        logging.error(f"Erro na função fazer_previsao_lote: {e}")
+        return []
+
+
+```
+
 ```
 
 ---
@@ -155,6 +206,54 @@ Content-Type: application/json
         },
         "PORTA": 5000
 }
+
+
+[
+  {
+    "cliente_id": "CLI_RISCO_1",
+    "nps_score": 2,
+    "tempo_contrato_meses": 3,
+    "valor_mensal": 89.90,
+    "frequencia_mensal": 3,
+    "duracao_media_treino_min": 40,
+    "tem_personal_trainer": 0,
+    "atrasos_pagamento_12m": 1,
+    "reducao_frequencia_3m": 1
+  },
+  {
+    "cliente_id": "CLI_SEGURO_2",
+    "nps_score": 10,
+    "tempo_contrato_meses": 55,
+    "valor_mensal": 299.90,
+    "frequencia_mensal": 18,
+    "duracao_media_treino_min": 95,
+    "tem_personal_trainer": 1,
+    "atrasos_pagamento_12m": 0,
+    "reducao_frequencia_3m": 0
+  }
+]
+
+
+Resposta esperada
+{
+  "resultados": [
+    {
+      "cliente_id": "CLI_RISCO_1",
+      "probabilidade_churn": 0.72,
+      "risco": "ALTO",
+      "1_mais_relevante": "nps_score",
+      "2_mais_relevante": "reducao_frequencia_3m",
+      "3_mais_relevante": "atrasos_pagamento_12m"
+    },
+    {
+      "cliente_id": "CLI_SEGURO_2",
+      "probabilidade_churn": 0.12,
+      "risco": "BAIXO",
+      "1_mais_relevante": "frequencia_mensal",
+      "2_mais_relevante": "tem_personal_trainer",
+      "3_mais_relevante": "nps_score"
+    }
+  ]
 ```
 
 
