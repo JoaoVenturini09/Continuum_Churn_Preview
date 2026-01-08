@@ -1,19 +1,13 @@
 # 📊 Continuum
 
-O Projeto Continuum propõe uma solução completa para previsão de churn, unindo Data Science e Back-end: o time de DS treina o modelo preditivo e o time de BE expõe previsões via API para que o negócio aja antes que o cliente decida sair. Com base em hábitos de uso e histórico de pagamento, uma fintech ou academia pode identificar clientes com alta probabilidade de evasão e realizar ações de retenção.
-
+O Projeto Continuum propõe uma solução completa para previsão de churn, unindo Data Science e Back-end: o time de DS treina o modelo preditivo e o time de BE expõe previsões via API para que o negócio aja antes que o cliente decida sair. Com base em hábitos de uso e histórico de pagamento, a academia pode identificar clientes com alta probabilidade de evasão e realizar ações de retenção.
 
 
 🎯 Desafio
 
 O ChurnInsight busca responder à seguinte pergunta:
 
-➡️ Quais clientes apresentam maior probabilidade de evasão e como podemos agir preventivamente?
-Para isso:
-
-• 	O time de Data Science será responsável por desenvolver um modelo preditivo de churn.
-
-• 	O time de Back-end construirá uma API que disponibilizará essas previsões para outros sistemas.
+➡️ Quais clientes apresentam maior probabilidade de evasão 
 
 Essa integração permitirá que o negócio aja antes que o cliente decida sair, aumentando a retenção e reduzindo perdas.
 
