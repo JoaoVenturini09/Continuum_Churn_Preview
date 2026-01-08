@@ -11,6 +11,7 @@ O ChurnInsight busca responder à seguinte pergunta:
 Para isso:
 
 • 	O time de Data Science será responsável por desenvolver um modelo preditivo de churn.
+
 • 	O time de Back-end construirá uma API que disponibilizará essas previsões para outros sistemas.
 
 Essa integração permitirá que o negócio aja antes que o cliente decida sair, aumentando a retenção e reduzindo perdas.
