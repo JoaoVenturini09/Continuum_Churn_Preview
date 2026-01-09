@@ -2,12 +2,17 @@ package com.hackathon.continuum.entity;
 
 import java.time.LocalDateTime;
 
+import com.hackathon.continuum.dto.RespostaDTO;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "resultado_churn")
@@ -15,7 +20,7 @@ public class ResultadoChurn {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long resultado_churn_id;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
@@ -61,7 +66,7 @@ public class ResultadoChurn {
 
 	// Getters
 	public Long getId() {
-        return id;
+        return resultado_churn_id;
     }
 
     public AnalizeChurn getAnalizeChurn() {
@@ -96,8 +101,8 @@ public class ResultadoChurn {
 	@Override
     public String toString() {
         return "ResultadoChurn{" +
-                "id=" + id +
-                ", analizeChurnId=" + analizeChurn.getCliente_id() +
+                "id=" + resultado_churn_id +
+                ", analizeChurnId=" + analizeChurn.getId() +
                 ", probabilidadeChurn=" + probabilidadeChurn +
                 ", risco='" + risco + '\'' +
                 ", primeiroMaisRelevante='" + primeiroMaisRelevante + '\'' +
@@ -105,4 +110,6 @@ public class ResultadoChurn {
                 ", terceiroMaisRelevante='" + terceiroMaisRelevante + '\'' +
                 ", resultadoDataHora=" + resultadoDataHora +
                 '}';
+    }
+
 }
