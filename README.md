@@ -7,7 +7,7 @@
 </div>
 
 <p align="center">
-  <img src="https://www.nocountry.tech/" width="160"/>
+  <img src="./logo.png" alt="NoCountry" width="160"/>
 </p>
 
 
