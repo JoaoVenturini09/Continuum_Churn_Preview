@@ -1,16 +1,3 @@
 {
-        "VALORES_PADRAO": {
-          "teve_desconto_promocao": "0",
-          "usa_app_academia": "0",
-          "faixa_etaria": "30",
-          "forma_pagamento": "Boleto",
-          "tipo_plano": "Básico",
-          "genero": "M",
-          "participa_aulas_coletivas": "0",
-          "participou_eventos": "0",
-          "risco_inatividade": "0",
-          "faixa_fidelidade": "0",
-          "numero_reclamacoes": "0"
-        },
         "PORTA": 5000
 }

@@ -11,11 +11,10 @@ def load_config():
         return json.load(f)
 
 config = load_config()
-VALORES_PADRAO = config['VALORES_PADRAO']
+
 PORTA = config['PORTA']
 
 caminho_modelo = 'modelo_pipeline_completo.pkl'
-
 
 app = Flask(__name__)
 
@@ -25,7 +24,7 @@ model = joblib.load(caminho_modelo)
 @app.route('/predict', methods=['POST'])
 def predict():
 
-    dados_dict = [request.get_json() | VALORES_PADRAO]
+    dados_dict = [request.get_json()]
 
     try:
         resultados = previsao_lote.fazer_previsao_lote(dados_dict, model)
