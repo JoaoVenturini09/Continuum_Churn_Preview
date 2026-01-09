@@ -291,6 +291,7 @@ Resposta esperada
 • 	Configuração H2 (application.properties)
 
 
+```
 spring.datasource.url=jdbc:h2:mem:continuumdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
@@ -382,7 +383,7 @@ public class AnalizeChurn {
     @Column private LocalDateTime criacao_data_hora;
 }
 
-
+```
 
 ---
 
