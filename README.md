@@ -298,12 +298,13 @@ spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=update
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
-
+```
 
 DTO de entrada
 
 Use o DTO para validar e mapear os campos recebidos pela API Java. Ele suporta aliases compatíveis com o pipeline do modelo.
 
+```
 package com.hackathon.continuum.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
@@ -339,9 +340,11 @@ public record EntradaDTO(
     @Positive @JsonAlias("dias_desde_ultimo_acesso") Integer dias_desde_ultimo_acesso,
     @JsonAlias("churn") String churn
 ) {}
+```
 
 Entidade AnalizeChurn (H2)
 
+```
 package com.hackathon.continuum.entity;
 
 import java.time.LocalDate;
