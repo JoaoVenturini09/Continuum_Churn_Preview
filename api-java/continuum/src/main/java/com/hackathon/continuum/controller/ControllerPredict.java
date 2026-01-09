@@ -31,9 +31,9 @@ public class ControllerPredict {
         StopWatch watch = new StopWatch();
         watch.start();
 
-
+        //TODO: cliente_id deve ser obtido no banco de dados.
         EntradaModeloDTO entradaModeloDTO = new EntradaModeloDTO(entradaDTO, traceId, "1");
-        System.out.println("*****" + entradaModeloDTO + "******");
+
         RespostaDTO respostaDTO = predictService.predict(entradaModeloDTO);
         watch.stop();
 
