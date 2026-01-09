@@ -278,13 +278,20 @@ Resposta esperada
     }
   ]
 ```
-▶️ Como executar
+▶️ Como executar:
+
 Backend Java (H2)
+
 • 	Pré-requisitos:
+
 • 	JDK: Temurin/OpenJDK 17
+
 • 	Build: Maven 3.9+
+
 • 	Banco: H2 embutido (dev)
+
 • 	Configuração H2 (application.properties)
+
 
 spring.datasource.url=jdbc:h2:mem:continuumdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
 spring.datasource.driverClassName=org.h2.Driver
@@ -293,6 +300,7 @@ spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=update
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
+
 
 DTO de entrada
 
