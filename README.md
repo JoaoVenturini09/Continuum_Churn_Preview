@@ -43,7 +43,7 @@ Essa integração permitirá que o negócio aja antes que o cliente decida sair,
 
 ---
 
-## 🔑 Variáveis consideradas
+## 🔑 Variáveis consideradas 
 
 - `nps_score`  
 - `tempo_contrato_meses`  
@@ -157,9 +157,7 @@ if __name__ == '__main__':
     app.run(port=PORTA)
 ```
 
-Rodar a API:
-
-O arquivo conteúdo do previsao_lote.py tem a função montor para processar lista de clientes e retornar previsões com interpretabilidade:
+Rodar a API com arquivo conteúdo do previsao_lote.py tem a função montor para processar lista de clientes e retornar previsões com interpretabilidade:
 
 ```
 import pandas as pd
@@ -422,15 +420,15 @@ docker run -d -p 8000:8000 continuum-api
 ---
 
 ## 📌 Observações
+     
+> ⚠️ Este é o repositório oficial que será demonstrado aos responsáveis.
 
-- Este projeto está em constante evolução.  
-- Alterações na estrutura e variáveis podem ocorrer conforme reuniões de alinhamento.  
-- O foco é entregar soluções **inovadoras e sustentáveis** para análise de churn em academias.
-- Este repositório documenta o progresso, objetivos e melhorias planejadas para garantir **qualidade, escalabilidade e impacto positivo**.  
-> ⚠️ Este é o repositório oficial que será demonstrado aos responsáveis.  
 > As informações envolvidas são de clientes de uma empresa de Academia, utilizando **base de dados fictícia** para análise.
+
 >  Lead-in de dados: Os aliases no DTO (JsonAlias) estão alinhados ao pipeline do modelo, facilitando integração direta.
+
 > H2 em dev: Ideal para demonstração e testes rápidos. Em produção, migre para banco gerenciado.]Interpretabilidade: As três features mais relevantes por cliente ajudam ações de retenção (marketing e suporte) de forma objetiva.
+
 > Evolução: O projeto é modular e preparado para escalar, incluindo troca de modelo, novas variáveis e integração com serviços externos.
 
 ---
