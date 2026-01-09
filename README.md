@@ -1,9 +1,10 @@
 # Organizadores do Hackathon
 
 <div align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" alt="Oracle Logo" width="160"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" alt="Oracle Logo" width="200"/>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://www.alura.com.br/assets/img/alura-logo.svg" alt="Alura Logo" width="160"/>
+  <img src="https://www.alura.com.br/assets/img/alura-logo.svg" alt="Alura Logo" width="160"/> 
+  <img src="https://github.com/JoaoVenturini09/Continuum_Churn_Preview/blob/7877f973423c243bca539cc8919c29f89701eb85/favicon%20No%20Country.png" alt="NoCountry" height="80"/>
 </div>
 
 
@@ -42,7 +43,7 @@ Essa integração permitirá que o negócio aja antes que o cliente decida sair,
 
 ---
 
-## 🔑 Variáveis consideradas
+## 🔑 Variáveis consideradas 
 
 - `nps_score`  
 - `tempo_contrato_meses`  
@@ -100,11 +101,11 @@ joblib.dump(modelo_rf_otimizado, "modelo_pipeline_completo.pkl")
 
 ```
 
-🔗 API e integração com o modelo (Python):
+🔗 API Python (FastAPI) e integração com o modelo (Python):
 
-API Python (FastAPI) — previsão em lote
 
-```python
+```
+python
 from fastapi import FastAPI
 import json
 
@@ -154,12 +155,11 @@ def predict():
 
 if __name__ == '__main__':
     app.run(port=PORTA)
+```
 
+Rodar a API com arquivo conteúdo do previsao_lote.py tem a função montor para processar lista de clientes e retornar previsões com interpretabilidade:
 
-Rodar a API:
-
-O arquivo conteúdo do previsao_lote.py tem a função montor para processar lista de clientes e retornar previsões com interpretabilidade:
-
+```
 import pandas as pd
 import logging
 
@@ -277,14 +277,20 @@ Resposta esperada
     }
   ]
 ```
-▶️ Como executar
-Backend Java (H2)
+▶️ Como executar Backend Java (H2): 
+
 • 	Pré-requisitos:
+
 • 	JDK: Temurin/OpenJDK 17
+
 • 	Build: Maven 3.9+
+
 • 	Banco: H2 embutido (dev)
+
 • 	Configuração H2 (application.properties)
 
+
+```
 spring.datasource.url=jdbc:h2:mem:continuumdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
@@ -292,15 +298,19 @@ spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=update
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
+```
 
 DTO de entrada
 
 Use o DTO para validar e mapear os campos recebidos pela API Java. Ele suporta aliases compatíveis com o pipeline do modelo.
 
+```
 package com.hackathon.continuum.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
@@ -330,9 +340,11 @@ public record EntradaDTO(
     @Positive @JsonAlias("dias_desde_ultimo_acesso") Integer dias_desde_ultimo_acesso,
     @JsonAlias("churn") String churn
 ) {}
+```
 
 Entidade AnalizeChurn (H2)
 
+```
 package com.hackathon.continuum.entity;
 
 import java.time.LocalDate;
@@ -373,7 +385,7 @@ public class AnalizeChurn {
     @Column private LocalDateTime criacao_data_hora;
 }
 
-
+```
 
 ---
 
@@ -411,15 +423,15 @@ docker run -d -p 8000:8000 continuum-api
 ---
 
 ## 📌 Observações
+     
+> ⚠️ Este é o repositório oficial que será demonstrado aos responsáveis.
 
-- Este projeto está em constante evolução.  
-- Alterações na estrutura e variáveis podem ocorrer conforme reuniões de alinhamento.  
-- O foco é entregar soluções **inovadoras e sustentáveis** para análise de churn em academias.
-- Este repositório documenta o progresso, objetivos e melhorias planejadas para garantir **qualidade, escalabilidade e impacto positivo**.  
-> ⚠️ Este é o repositório oficial que será demonstrado aos responsáveis.  
 > As informações envolvidas são de clientes de uma empresa de Academia, utilizando **base de dados fictícia** para análise.
+
 >  Lead-in de dados: Os aliases no DTO (JsonAlias) estão alinhados ao pipeline do modelo, facilitando integração direta.
+
 > H2 em dev: Ideal para demonstração e testes rápidos. Em produção, migre para banco gerenciado.]Interpretabilidade: As três features mais relevantes por cliente ajudam ações de retenção (marketing e suporte) de forma objetiva.
+
 > Evolução: O projeto é modular e preparado para escalar, incluindo troca de modelo, novas variáveis e integração com serviços externos.
 
 ---
@@ -462,5 +474,12 @@ O projeto uniu esforços de **Ciência de Dados** e **Back-End** para construir 
 - Nayara Calixto — [LinkedIn](https://www.linkedin.com/in/nayara-calixto-dev/)  
 - Geovane Dias — [LinkedIn](https://www.linkedin.com/in/geovane-dias/)  
 - Gabryel Júlio dos Santos — [LinkedIn](https://www.linkedin.com/in/gabryel-santos)  
+
+---
+
+## 🎯 Reconhecimento
+
+Este projeto é fruto de **colaboração multidisciplinar**, unindo ciência de dados e engenharia de software para entregar uma solução inovadora e sustentável.  
+Agradecemos a todos os membros pela dedicação, criatividade e comprometimento em cada etapa do desenvolvimento.
 
 ---
