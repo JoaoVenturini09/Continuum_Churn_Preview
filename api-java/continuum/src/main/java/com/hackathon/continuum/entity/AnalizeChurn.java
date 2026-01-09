@@ -3,12 +3,7 @@ package com.hackathon.continuum.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "analize_churn")
@@ -78,7 +73,7 @@ public class AnalizeChurn {
 
     // Getters e Setters
     public Long getId() {
-        return id;
+        return cliente_id;
     }
 
     public String getNome() {

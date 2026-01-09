@@ -1,6 +1,6 @@
 package com.hackathon.continuum.service;
 
-import com.hackathon.continuum.dto.EntradaDTO;
+import com.hackathon.continuum.dto.EntradaModeloDTO;
 import com.hackathon.continuum.dto.RespostaDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -15,12 +15,12 @@ public class PredictService {
 
     private final RestClient restClient = RestClient.create();
 
-    public RespostaDTO predict(EntradaDTO entradaDTO){
+    public RespostaDTO predict(EntradaModeloDTO entradaModeloDTO){
 
         return restClient.post()
                 .uri(uri)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(entradaDTO)
+                .body(entradaModeloDTO)
                 .retrieve()
                 .body(RespostaDTO.class);
     }

@@ -2,12 +2,8 @@ package com.hackathon.continuum.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.hackathon.continuum.dto.RespostaDTO;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "resultado_churn")
@@ -28,39 +24,39 @@ public class ResultadoChurn {
     private String risco;
 
     @Column(name = "primeiro_mais_relevante", length = 100)
-	private String primeiroMaisRelevante;
+    private String primeiroMaisRelevante;
 
-	@Column(name = "segundo_mais_relevante", length = 100)
-	private String segundoMaisRelevante;
+    @Column(name = "segundo_mais_relevante", length = 100)
+    private String segundoMaisRelevante;
 
-	@Column(name = "terceiro_mais_relevante", length = 100)
-	private String terceiroMaisRelevante;
+    @Column(name = "terceiro_mais_relevante", length = 100)
+    private String terceiroMaisRelevante;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime resultadoDataHora;
 
-	// Construtor padrão
-	public ResultadoChurn() {
-	}
+    // Construtor padrão
+    public ResultadoChurn() {
+    }
 
-	// Construtor 
-	public ResultadoChurn(RespostaDTO dto, AnalizeChurn analizeChurn) {
-    this.analizeChurn = analizeChurn;
-    this.probabilidadeChurn = dto.probabilidade_churn();
-    this.risco = dto.risco();
-    this.primeiroMaisRelevante = dto.primeiro_mais_relevante();
-    this.segundoMaisRelevante = dto.segundo_mais_relevante();
-    this.terceiroMaisRelevante = dto.terceiro_mais_relevante();
-	}
+    // Construtor
+    public ResultadoChurn(RespostaDTO dto, AnalizeChurn analizeChurn) {
+        this.analizeChurn = analizeChurn;
+        this.probabilidadeChurn = dto.probabilidade_churn();
+        this.risco = dto.risco();
+        this.primeiroMaisRelevante = dto.primeiro_mais_relevante();
+        this.segundoMaisRelevante = dto.segundo_mais_relevante();
+        this.terceiroMaisRelevante = dto.terceiro_mais_relevante();
+    }
 
-	// Data e hora automáticas
-	@PrePersist
-	private void prePersist() {
-    	this.resultadoDataHora = LocalDateTime.now();
-	}
+    // Data e hora automáticas
+    @PrePersist
+    private void prePersist() {
+        this.resultadoDataHora = LocalDateTime.now();
+    }
 
-	// Getters
-	public Long getId() {
+    // Getters
+    public Long getId() {
         return id;
     }
 
@@ -92,12 +88,12 @@ public class ResultadoChurn {
         return resultadoDataHora;
     }
 
-	// toString
-	@Override
+    // toString
+    @Override
     public String toString() {
         return "ResultadoChurn{" +
                 "id=" + id +
-                ", analizeChurnId=" + analizeChurn.getCliente_id() +
+                ", analizeChurnId=" + analizeChurn.getId() +
                 ", probabilidadeChurn=" + probabilidadeChurn +
                 ", risco='" + risco + '\'' +
                 ", primeiroMaisRelevante='" + primeiroMaisRelevante + '\'' +
@@ -105,4 +101,5 @@ public class ResultadoChurn {
                 ", terceiroMaisRelevante='" + terceiroMaisRelevante + '\'' +
                 ", resultadoDataHora=" + resultadoDataHora +
                 '}';
+    }
 }
