@@ -1,5 +1,6 @@
 package com.hackathon.continuum.infra.excecoes;
 
+import com.hackathon.continuum.infra.filtros.LogTrace;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +14,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class TratadorDeExcecoes {
 
+
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity tratarErro400(MethodArgumentNotValidException ex){
 
         var erros = ex.getFieldErrors();
         int numeroDeErros = erros.size();
-        String traceId = getTraceId();
+        String traceId = LogTrace.getTraceId();
 
         var msgCampos = erros.size() > 1 ? String.format("Os seguintes %d campos não passaram na validação: ", numeroDeErros) : "O seguinte campo não passou na validação: ";
 
@@ -38,30 +41,26 @@ public class TratadorDeExcecoes {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity tratarErro400(HttpMessageNotReadableException ex) {
-
-        log.warn("Falha na leitura do JSON - TraceId: [{}] - {}", getTraceId(), ex.getMostSpecificCause().getMessage());
+        String traceId = LogTrace.getTraceId();
+        log.warn("Falha na leitura do JSON - TraceId: [{}] - {}", traceId, ex.getMostSpecificCause().getMessage());
 
         return ResponseEntity.badRequest().body(new ErroPadraoDTO(
                 "Erro na sintaxe do JSON ou tipo de dado inválido. Verifique se campos numéricos receberam texto.",
-                getTraceId(),
+                traceId,
                 null
         ));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity tratarErro500(Exception ex) {
-
-        log.error("Erro crítico - TraceId: [{}] - {}", getTraceId(), ex.getMessage(), ex);
+        String traceId = LogTrace.getTraceId();
+        log.error("Erro crítico - TraceId: [{}] - {}", traceId, ex.getMessage(), ex);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErroPadraoDTO(
                 "Ocorreu um erro interno. Informe o código de rastreio ao suporte.",
-                getTraceId(),
+                traceId,
                 null
         ));
-    }
-
-    private String getTraceId() {
-        return org.slf4j.MDC.get("traceId");
     }
 
     private record DadosErroValidacao(
