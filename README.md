@@ -278,9 +278,7 @@ Resposta esperada
     }
   ]
 ```
-▶️ Como executar:
-
-Backend Java (H2)
+▶️ Como executar Backend Java (H2): 
 
 • 	Pré-requisitos:
 
@@ -309,7 +307,9 @@ Use o DTO para validar e mapear os campos recebidos pela API Java. Ele suporta a
 package com.hackathon.continuum.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
