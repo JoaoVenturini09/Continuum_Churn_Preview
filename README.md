@@ -7,7 +7,7 @@
 </div>
 
 <p align="center">
-  <img src="./logo.png" alt="NoCountry" width="160"/>
+  <img src="https://github.com/JoaoVenturini09/Continuum_Churn_Preview/blob/7877f973423c243bca539cc8919c29f89701eb85/favicon%20No%20Country.png" alt="NoCountry" width="160"/>
 </p>
 
 
