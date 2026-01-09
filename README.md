@@ -6,6 +6,8 @@
   <img src="https://www.alura.com.br/assets/img/alura-logo.svg" alt="Alura Logo" width="160"/>
 </div>
 
+<br>
+
 <p align="center">
   <img src="https://github.com/JoaoVenturini09/Continuum_Churn_Preview/blob/7877f973423c243bca539cc8919c29f89701eb85/favicon%20No%20Country.png" alt="NoCountry" width="160"/>
 </p>
