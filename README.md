@@ -101,11 +101,11 @@ joblib.dump(modelo_rf_otimizado, "modelo_pipeline_completo.pkl")
 
 ```
 
-🔗 API e integração com o modelo (Python):
+🔗 API Python (FastAPI) e integração com o modelo (Python):
 
-API Python (FastAPI) — previsão em lote
 
-```python
+```
+python
 from fastapi import FastAPI
 import json
 
@@ -155,12 +155,13 @@ def predict():
 
 if __name__ == '__main__':
     app.run(port=PORTA)
-
+```
 
 Rodar a API:
 
 O arquivo conteúdo do previsao_lote.py tem a função montor para processar lista de clientes e retornar previsões com interpretabilidade:
 
+```
 import pandas as pd
 import logging
 
