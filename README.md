@@ -177,6 +177,8 @@ O H2 é um banco relacional leve, que roda em memória ou em arquivo, ideal para
 
 • 	🗄️ Banco: H2 embutido (não precisa instalar nada)
 
+---
+
 ## 🐳 Instalação Rápida com Docker (opcional para demo)
 
 ### 📦 Executando com Docker
@@ -219,8 +221,6 @@ docker compose down
 
 ---
 
-
----
 
 ## 📌 Observações
      
