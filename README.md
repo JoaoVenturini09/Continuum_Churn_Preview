@@ -177,38 +177,30 @@ O H2 é um banco relacional leve, que roda em memória ou em arquivo, ideal para
 
 • 	🗄️ Banco: H2 embutido (não precisa instalar nada)
 
----
-
 ## 🐳 Instalação Rápida com Docker (opcional para demo)
 
 ### 📦 Executando com Docker
 
-### 1. Rodar diretamente com `docker run`
+### Rodar com `docker compose`
 
----
-```bash
-docker run -d -p 8000:8000 continuum-
-
-```
----
-
-### 2. Rodar com `docker compose`
-
-Na raiz do projeto, execute no terminal:
+Na raiz do projeto Brande Docker, execute no terminal:
 
 ```
 docker compose up --build
 ```
 
-
 ---
 
 ## 🧪 Testando a API
 
-Após subir o container, você pode testar no navegador ou via ferramentas como **VSCode REST Client**:
+Após subir o container, você pode testar no navegador ou via ferramentas como **VSCode REST Client**, **live server**:
 
 ```bash
 http://localhost:8080/analises-churn
+```
+
+```bash
+http://localhost:8080/index.html
 ```
 
 ---
@@ -224,6 +216,9 @@ http://localhost:8080/analises-churn
 ```bash
 docker compose down
 ```
+
+---
+
 
 ---
 
