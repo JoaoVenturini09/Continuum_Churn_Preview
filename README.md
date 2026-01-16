@@ -178,7 +178,17 @@ O H2 é um banco relacional leve, que roda em memória ou em arquivo, ideal para
 • 	🗄️ Banco: H2 embutido (não precisa instalar nada)
 
 ---
+# 📊 Estatísticas de Churn
 
+Este serviço expõe um endpoint para consultar estatísticas básicas sobre os avaliados e suas probabilidades de churn.
+
+Big numbers: 
+
+. Quantidade de avaliados (Count dos registros da tabela de resultados) 
+. Média de probabilidade entre todos os avaliados(Soma de todas as probabilidades e divide pela quantidade de registros) 
+. Probabilidade alta (Em percentual, quantos registros tiveram ALTA probabilidade de churn).
+
+---
 ## 🐳 Instalação Rápida com Docker (opcional para demo)
 
 ### 📦 Executando com Docker
