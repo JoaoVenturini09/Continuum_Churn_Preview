@@ -184,9 +184,9 @@ Este serviço expõe um endpoint para consultar estatísticas básicas sobre os 
 
 Big numbers: 
 
-•  Quantidade de avaliados (Count dos registros da tabela de resultados) 
+•  Quantidade de avaliados.
 
-• Média de probabilidade entre todos os avaliados(Soma de todas as probabilidades e divide pela quantidade de registros) 
+• Média de probabilidade entre todos os avaliados 
 
 •  Probabilidade alta (Em percentual, quantos registros tiveram ALTA probabilidade de churn).
 
@@ -297,4 +297,3 @@ Este projeto é fruto de **colaboração multidisciplinar**, unindo ciência de 
 Agradecemos a todos os membros pela dedicação, criatividade e comprometimento em cada etapa do desenvolvimento.
 
 ---
-
