@@ -12,12 +12,12 @@
   <img src="https://img.shields.io/badge/No%20Country-000000?style=for-the-badge&logoColor=white">
   
 </div>
-
-
-
-# 📊 Continuum
+ 
 
 ---
+
+# <img src="https://github.com/user-attachments/assets/d8419ab3-9338-4d35-9913-1c29d07296f7" alt="l" width="150"/> 
+
 O Projeto Continuum propõe uma solução completa para previsão de churn, unindo Data Science e Back-end: o time de DS treina o modelo preditivo e o time de BE expõe previsões via API para que o negócio aja antes que o cliente decida sair. Com base em hábitos de uso e histórico de pagamento, a academia pode identificar clientes com alta probabilidade de evasão e realizar ações de retenção.
 
 Incluímos sugestões de ações de retenção baseadas no percentual de probabilidade de churn de cada cliente. Abaixo estão exemplos de recomendações para cada nível de classificação de risco:
@@ -28,6 +28,7 @@ Incluímos sugestões de ações de retenção baseadas no percentual de probabi
 
 - Alta probabilidade de Churn. Sugerimos: "Oferta personalizada e acompanhamento com personal trainer."
 
+## 📊 Detalhes sobre o funcionamento de Dados: [Modelo Continuum Preview (PDF)](https://github.com/JoaoVenturini09/Continuum_Churn_Preview/blob/docker/Modelo_Continuum_Preview.pdf)
 ---
 
 🎯 Desafio
@@ -213,10 +214,16 @@ Após subir o container, você pode testar no navegador ou via ferramentas como 
 http://localhost:8080/analises-churn
 ```
 
-Para ter acesso pelo navegador usar este caminho:
+Para ter acesso pelo navegador usar este caminho para API:
 
 ```bash
 http://localhost:8080/index.html
+```
+
+Para ter acesso pelo navegador usar este caminho pela OCI para API:
+
+```bash
+http://140.238.180.36:8080/index.html
 ```
 
 ---
@@ -297,3 +304,4 @@ Este projeto é fruto de **colaboração multidisciplinar**, unindo ciência de 
 Agradecemos a todos os membros pela dedicação, criatividade e comprometimento em cada etapa do desenvolvimento.
 
 ---
+
