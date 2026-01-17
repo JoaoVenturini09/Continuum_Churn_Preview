@@ -1,10 +1,6 @@
 # Organizadores do Hackathon
 
 <div>
-  <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white">
-  
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white">
-  
   <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
   
   <img src="https://img.shields.io/badge/Alura-13294B?style=for-the-badge">
@@ -20,13 +16,15 @@
 
 O Projeto Continuum propõe uma solução completa para previsão de churn, unindo Data Science e Back-end: o time de DS treina o modelo preditivo e o time de BE expõe previsões via API para que o negócio aja antes que o cliente decida sair. Com base em hábitos de uso e histórico de pagamento, a academia pode identificar clientes com alta probabilidade de evasão e realizar ações de retenção.
 
-Incluímos sugestões de ações de retenção baseadas no percentual de probabilidade de churn de cada cliente. Abaixo estão exemplos de recomendações para cada nível de classificação de risco:
+Para cada faixa de probabilidade sugerimos algumas ações de retenção ao cliente. 
 
-- Menor risco de probabilidade de Churn. A sugestão é :  "Contato proativo com o cliente e oferta de upgrade ou desconto."
+Exemplo: 
 
-- Risco médio de Churn. A sugestão é : "Manter comunicação ativa e oferecer benefícios de fidelidade."
-
-- Alta probabilidade de Churn. Sugerimos: "Oferta personalizada e acompanhamento com personal trainer."
+- Para a faixa entre 0% e 19%, sugerimos manter relacionamento padrão.
+- Para a faixa entre 20% e 39%, sugerimos comunicação ativa e incentivo ao engajamento.
+- Para a faixa entre 40% e 59%, sugerimos oferta de benefício leve (ex: brinde ou aula extra).
+- Para a faixa entre 60% e 79%, sugerimos oferta de desconto ou upgrade de plano.
+- Para a faixa entre 80% e 100%, sugerimos ação personalizada com contato direto do time de retenção.
 
 ## 📊 Detalhes sobre o funcionamento de Dados: [Modelo Continuum Preview (PDF)](https://github.com/JoaoVenturini09/Continuum_Churn_Preview/blob/docker/Modelo_Continuum_Preview.pdf)
 ---
@@ -52,10 +50,10 @@ Essa integração permitirá que o negócio aja antes que o cliente decida sair,
 
 ## 🚀 Objetivos
  
-- **Performance e Escalabilidade** → Otimizar processos e arquitetura para maior volume de dados e usuários.  
-- **Interface e UX/UI** → Aprimorar design e usabilidade.  
-- **Segurança** → Adotar boas práticas de proteção de dados.  
-- **Integrações Futuras** → Planejar integrações com serviços externos relevantes.  
+ • Este projeto tem como objetivo utilizar Inteligência Artificial (Machine Learning) para identificar quais alunos possuem maior probabilidade de cancelar sua matrícula (churn).
+Com isso, a academia pode tomar ações preventivas, oferecendo suporte ou incentivos antes que o aluno decida sair.
+
+ • A ferramenta transforma a gestão da academia de reativa (esperar o cancelamento) para proativa (agir antes do churn acontecer).
 
 ---
 
@@ -76,14 +74,14 @@ Essa integração permitirá que o negócio aja antes que o cliente decida sair,
 
 ## ⚙️ Tecnologias e Ferramentas
 
-- **Python** (microserviço e APIs)  
-- **Machine Learning** → scikit-learn , pandas , numpy 
-- **Banco de Dados H2** (persistência leve e integrada)  
-- **Docker**  para containerização e deploy  
-- **Frameworks de API** → Flask 
-- **Dashboard** → Streamlit ou Dash  
-- **Joblib**  para serialização de modelos  
-- **Dashboard** : HTML , CSS e JavaScript
+- **Python** → (microserviço e APIs)  
+- **Machine Learning** → (scikit-learn , pandas , numpy) 
+- **Banco de Dados H2** → (persistência leve e integrada)  
+- **Docker** → (para containerização e deploy)  
+- **Frameworks de API** → (Flask para serviços em Python)
+- **Java + Spring Boot** → (backend robusto e escalável)
+- **Joblib** → (serialização de modelos)  
+-  **Front end** → (HTML , CSS e JavaScript)
 ---
 
 ## 📈 Entregáveis do Projeto:
@@ -96,7 +94,6 @@ Essa integração permitirá que o negócio aja antes que o cliente decida sair,
 - Dashboard simples para visualização de riscos e métricas  
 - Processamento batch para análises periódicas  
 - Container configurado para deploy  
-- Parametrização de métricas de retenção  
 
 ---
 
